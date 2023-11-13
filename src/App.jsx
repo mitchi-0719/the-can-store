@@ -18,6 +18,22 @@ export default function App() {
     })();
   }, []);
 
+  const mainContent = cans
+    .filter(
+      (can) =>
+        (selectCategory === "all" || can.type === selectCategory) &&
+        can.name.includes(searchKeyword)
+    )
+    .map((can, index) => {
+      return (
+        <section className={can.type} key={index}>
+          <h2>{can.name}</h2>
+          <p>${can.price}</p>
+          <img src={`images/${can.image}`} alt={can.name} />
+        </section>
+      );
+    });
+
   return (
     <>
       <header>
@@ -56,21 +72,7 @@ export default function App() {
           </form>
         </aside>
         <main>
-          {cans
-            .filter(
-              (can) =>
-                (selectCategory === "all" || can.type === selectCategory) &&
-                can.name.includes(searchKeyword)
-            )
-            .map((can, index) => {
-              return (
-                <section className={can.type} key={index}>
-                  <h2>{can.name}</h2>
-                  <p>${can.price}</p>
-                  <img src={`images/${can.image}`} alt={can.name} />
-                </section>
-              );
-            })}
+          {mainContent.length === 0 ? <p>No results to display!</p> : mainContent}
         </main>
       </div>
       <footer>
