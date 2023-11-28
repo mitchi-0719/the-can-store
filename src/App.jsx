@@ -72,7 +72,11 @@ export default function App() {
           </form>
         </aside>
         <main>
-          {mainContent.length === 0 ? <p>No results to display!</p> : mainContent}
+          {mainContent.length === 0 ? (
+            <p>No results to display!</p>
+          ) : (
+            mainContent
+          )}
         </main>
       </div>
       <footer>
